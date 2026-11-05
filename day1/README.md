@@ -4,12 +4,12 @@
 
 1. `day1.toe` を開き、動画を Spout 名 `TDSyphonSpoutOut` で送信します。
 2. `RUN.cmd` をダブルクリックします。
-3. TD の `/project1/websocket1` で最新の JSON、`json2` で特徴点のテーブルを確認します。
+3. TD の `/project1/RECEIVER/INPUT_MSGS` で種類ごとの最新JSON、`MSG_SELECT` で `face_landmarks` の選択、`json2` で特徴点のテーブルを確認します。
 
 Python のウィンドウを閉じるか Esc を押すと終了します。
-Python を再起動した後に受信が再開しなければ、`/project1/websocket1` の Active を一度オフにしてオンにします。
+PythonがTDのWebSocketサーバーへ接続します。切断した場合はPython側が自動で再接続します。
 
-共通モデルは `../models/face_landmarker.task`。WebSocket は同じ PC の `127.0.0.1:8765` です。
+共通モデルは `../models/face_landmarker.task`。WebSocket は同じ PC の `127.0.0.1:8765` です。Day1とDay2は同時に起動しません。TD操作用ブリッジの44445とは別です。
 AI が起動する場合は workspace で `pixi run --locked python -m day1.main` を実行します。
 `--faces 2` で最大2人を解析できます。
 

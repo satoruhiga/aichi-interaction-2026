@@ -12,7 +12,7 @@ from common.spout_receiver import SpoutReceiver
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sender", default="TDSyphonSpoutOut")
-    parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--port", type=int, default=8765, help="TouchDesigner Web Server DAT port")
     parser.add_argument("--faces", type=int, default=1)
     args = parser.parse_args()
     if args.faces < 1:

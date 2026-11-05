@@ -7,6 +7,14 @@ from urllib.request import urlopen
 
 # Official MediaPipe distribution; the hash pins the content if latest changes.
 MODELS = {
+    "hand_landmarker.task": (
+        "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
+        "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+    ),
+    "pose_landmarker_full.task": (
+        "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/1/pose_landmarker_full.task",
+        "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1",
+    ),
     "face_landmarker.task": (
         "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/latest/face_landmarker.task",
         "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
