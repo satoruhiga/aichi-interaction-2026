@@ -2,8 +2,8 @@
 
 初回は workspace で `pixi run --locked python scripts/download_models.py` を実行し、共通モデルを取得します。
 
-1. `day1.toe` を開き、動画を Spout 名 `TDSyphonSpoutOut` で送信します。
-2. `RUN.cmd` をダブルクリックします。
+1. `day1.toe` を開き、動画を Spout 名 `TDSyphonSpoutOut` で送信します。macOS では同じ名前の Syphon で送信されます。
+2. `RUN.cmd` をダブルクリックします。macOS では workspace で `pixi run --locked python -m day1.main` を実行します。
 3. TD の `/project1/RECEIVER/INPUT_MSGS` で種類ごとの最新JSON、`MSG_SELECT` で `face_landmarks` の選択、`json2` で特徴点のテーブルを確認します。
 
 Python のウィンドウを閉じるか Esc を押すと終了します。

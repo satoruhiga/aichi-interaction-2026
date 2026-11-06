@@ -1,7 +1,7 @@
 ﻿# Day 2: MediaPipeとTouchDesigner
 
 1. `day2.toe` を開きます。
-2. 顔は `RUN_FACE.cmd`、手は `RUN_HAND.cmd`、体は `RUN_POSE.cmd` をダブルクリックします。複数を同時に起動できます。
+2. 顔は `RUN_FACE.cmd`、手は `RUN_HAND.cmd`、体は `RUN_POSE.cmd` をダブルクリックします。複数を同時に起動できます。macOS では下にある手動実行のコマンドを使います。
 3. 終了はPythonのプレビューで Esc、またはコンソールで Ctrl+C を押します。
 
 | 起動ファイル | TDのサンプル |
@@ -29,7 +29,7 @@ pixi run --locked python -m day2.scripts.pose
 
 ## 映像と受信
 
-TDの `/project1/VIDEO` を表示と解析の基準にします。PythonはSpoutの `TDSyphonSpoutOut` を640×360で受け取り、解析結果をTDのWebSocketサーバー（ポート8765）へ送ります。
+TDの `/project1/VIDEO` を表示と解析の基準にします。PythonはSpout（macOSではSyphon）の `TDSyphonSpoutOut` を640×360で受け取り、解析結果をTDのWebSocketサーバー（ポート8765）へ送ります。
 
 Pythonには `--sender TDSyphonSpoutOut`、`--port 8765`、`--hidden`、`--seconds 10` を指定できます。
 

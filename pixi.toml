@@ -2,7 +2,7 @@
 name = "aichi-interaction-2026"
 version = "0.1.0"
 channels = ["conda-forge"]
-platforms = ["win-64"]
+platforms = ["win-64", "osx-arm64"]
 
 [dependencies]
 python = "3.11.*"
@@ -15,6 +15,11 @@ pyglfw = ">=2.9.0,<3"
 rich = ">=14.2.0,<15"
 
 [pypi-dependencies]
-spoutgl = ">=0.1.1"
 mediapipe = ">=0.10.21"
 websockets = ">=17.4, <18"
+
+[target.win-64.pypi-dependencies]
+spoutgl = ">=0.1.1"
+
+[target.osx-arm64.pypi-dependencies]
+syphon-python = ">=0.2.0"
