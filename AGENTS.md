@@ -10,7 +10,7 @@
 - Python は原則としてこのフォルダを作業ディレクトリにします。共通モジュールを使う教材は `pixi run --locked python -m day1.main` のように起動します。具体的な起動方法は各教材の README に従います。
 - 依存を変更するときはルートの設定とロックファイルを揃え、ほかの教材への影響を確認します。環境内への直接の `pip install` だけで済ませないでください。
 - `.pixi/` は環境の生成物です。
-- 教材の実行に必要なモデルが `models/` にない場合は、`pixi run --locked python scripts/download_models.py` で取得します。新しいモデルを使う場合は、信頼できる配布元と検証用ハッシュを確認し、同スクリプトの取得定義へ追加してから取得します。モデル本体は Git に追加しないでください。
+- モデルの URL・`models/` 内の相対保存先・SHA256 は、そのモデルを使う Python スクリプトに記述します。初期化時に `common.models.ensure_model(url=..., path=..., sha256=...)` を呼び、必要なモデルを取得・検証します。新しいモデルでは信頼できる配布元とハッシュを確認してください。モデル本体は Git に追加しないでください。
 
 ## 教材の改造と組み合わせ
 
@@ -24,5 +24,5 @@
 
 - TD の操作は利用可能な touchdesigner スキルに従い、ブリッジの接続先が編集対象の `.toe` であることを確認します。
 - Python と TD のデータ連携では [docs/python-to-touchdesigner.md](docs/python-to-touchdesigner.md)、座標変換や重ね合わせでは [docs/coordinates.md](docs/coordinates.md) を参照します。
-- 共通知識は `docs/`、教材固有の仕様は各教材の README にあります。モデルは `scripts/download_models.py` で取得します。資料だけで判断せず、変更対象のコードと TD の実設定を確認します。
+- 共通知識は `docs/`、教材固有の仕様は各教材の README にあります。資料だけで判断せず、変更対象のコードと TD の実設定を確認します。
 - PC 操作に不慣れな学生にも分かるよう、何を開き、何を実行するかを具体的に短く説明します。

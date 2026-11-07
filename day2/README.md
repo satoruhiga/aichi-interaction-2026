@@ -25,7 +25,7 @@ pixi run --locked python -m day2.scripts.hand
 pixi run --locked python -m day2.scripts.pose
 ```
 
-モデルがない場合は、ルートで `pixi run --locked python scripts/download_models.py` を実行します。
+各スクリプトは起動時に必要なモデルだけを自動取得します。初回はインターネット接続が必要です。取得済みのモデルは共通の `models/` から再利用します。
 
 ## 映像と受信
 

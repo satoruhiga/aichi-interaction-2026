@@ -1,6 +1,6 @@
 ﻿# Day 1: 顔解析の JSON 受信
 
-初回は workspace で `pixi run --locked python scripts/download_models.py` を実行し、共通モデルを取得します。
+必要なモデルは Python の起動時に自動取得します。初回はインターネット接続が必要です。取得済みのモデルは `models/` から再利用します。
 
 1. `day1.toe` を開き、動画を Spout 名 `TDSyphonSpoutOut` で送信します。macOS では同じ名前の Syphon で送信されます。
 2. `RUN.cmd` をダブルクリックします。macOS では workspace で `pixi run --locked python -m day1.main` を実行します。

@@ -1,13 +1,10 @@
 """Shared camera transport and timing for the three independent examples."""
 import argparse
-from pathlib import Path
 import time
 
 import mediapipe as mp
 from common.json_sender import JsonSender
 from common.spout_receiver import SpoutReceiver
-
-MODELS = Path(__file__).resolve().parents[2] / 'models'
 
 
 def arguments(description):
