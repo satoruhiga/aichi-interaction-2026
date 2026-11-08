@@ -60,7 +60,7 @@ CHOP へ渡す場合は、何をチャンネル、何をサンプルにするか
 
 ## この workspace の共通送信部
 
-[common/json_sender.py](../common/json_sender.py) は、最新状態を配信するための WebSocket サーバー。イベントを全件届ける送信部ではない。
+[common/json_sender.py](../common/json_sender.py) は、TD の WebSocket サーバー（Web Server DAT）へ接続して最新状態を送るクライアント。イベントを全件届ける送信部ではない。
 
 ```python
 from common.json_sender import JsonSender
@@ -70,12 +70,12 @@ with JsonSender() as sender:
         sender.publish(state)
 ```
 
-- 既定の待受は `127.0.0.1:8765`。TD は同じ PC から接続する。
-- publish する値は JSON 化できる辞書・リスト・数値など。NumPy 配列は `.tolist()`、スカラーは `.item()` などで変換する。NaN・Infinity は受け付けない。
-- 送信待ちは最新1件だけ保持し、各クライアントが約30Hzで新しい値を確認する。複数クライアントに配信できる。中間の publish 結果は省略され得るため、各値は単独で解釈できる全状態にする。
-- `publish()` は配信完了を待たない。処理ループを with の中で継続し、呼び出し直後に終了しない。
+- 既定の接続先は `ws://127.0.0.1:8765`。TD が同じ PC で待ち受ける。切断時は自動で再接続する。
+- publish する値は `type` を持つ辞書。値は JSON 化できる辞書・リスト・数値など。NumPy 配列は `.tolist()`、スカラーは `.item()` などで変換する。NaN・Infinity は受け付けない。
+- 送信待ちは `type` ごとに最新1件だけ保持し、約30Hzで新しい値を送る。中間の publish 結果は省略され得るため、各値は単独で解釈できる全状態にする。
+- `publish()` は送信完了を待たない。処理ループを with の中で継続し、呼び出し直後に終了しない。
 - 通信バッファや受信処理にも遅延があるため、約30Hzは到達速度や遅延の保証ではない。
-- 複数プロセスが同じアドレス・ポートで待ち受けないようにする。ポートを変えたら TD の接続先も揃える。
+- TD から送られたメッセージは毎回読み出す。`JsonSender(on_message=関数)` を渡すと JSON の辞書を受け取れる。渡さなければ捨てる。TD 側は接続中の全クライアントへ送ってよく、各プロセスは自分が扱う `type` だけに反応する。
 
 教材ごとのデータ形式と起動方法は、その教材の README に記載する。
 

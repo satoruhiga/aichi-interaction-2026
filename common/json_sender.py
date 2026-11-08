@@ -1,4 +1,7 @@
-"""Publish the latest state per type to a TouchDesigner WebSocket server."""
+"""Publish the latest state per type to a TouchDesigner WebSocket server.
+
+Messages sent by TouchDesigner are read and passed to on_message, or discarded when it is None.
+"""
 import json
 import threading
 
@@ -7,8 +10,9 @@ from websockets.exceptions import WebSocketException
 
 
 class JsonSender:
-    def __init__(self, host="127.0.0.1", port=8765):
+    def __init__(self, host="127.0.0.1", port=8765, on_message=None):
         self.url = f"ws://{host}:{port}"
+        self._on_message = on_message
         self._latest = {}
         self._lock = threading.Lock()
         self._stop = threading.Event()
@@ -35,11 +39,32 @@ class JsonSender:
                             if previous.get(kind) is not message:
                                 websocket.send(message)
                                 previous[kind] = message
+                        self._receive(websocket)
                         self._stop.wait(1 / 30)
             except (OSError, WebSocketException, TimeoutError) as error:
                 if not self._stop.is_set():
                     print(f"WebSocket waiting: {error}", flush=True)
                     self._stop.wait(1)
+
+    def _receive(self, websocket):
+        for _ in range(64):
+            if self._stop.is_set():
+                return
+            try:
+                data = websocket.recv(timeout=0)
+            except TimeoutError:
+                return
+            if self._on_message is None or not isinstance(data, str):
+                continue
+            try:
+                message = json.loads(data)
+            except ValueError:
+                continue
+            if isinstance(message, dict):
+                try:
+                    self._on_message(message)
+                except Exception as error:
+                    print(f"WebSocket message rejected: {error}", flush=True)
 
     def __enter__(self):
         self._thread.start()
