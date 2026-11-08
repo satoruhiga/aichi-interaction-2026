@@ -4,6 +4,9 @@ version = "0.1.0"
 channels = ["conda-forge"]
 platforms = ["win-64", "osx-arm64"]
 
+[activation.env]
+PYTHONNOUSERSITE = "1"
+
 [dependencies]
 python = "3.11.*"
 git = ">=2.56.0,<3"
