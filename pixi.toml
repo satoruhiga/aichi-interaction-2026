@@ -18,6 +18,7 @@ pyglfw = ">=2.9.0,<3"
 rich = ">=14.2.0,<15"
 # cpu_* builds: Vulkan on Windows, Metal on macOS (no CUDA toolkit).
 "llama.cpp" = { version = ">=12004", build = "cpu_*" }
+platformio = ">=6.2.0,<7"
 
 [pypi-dependencies]
 mediapipe = ">=0.10.21"
